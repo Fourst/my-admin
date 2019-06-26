@@ -1,50 +1,83 @@
 import React, { Component } from 'react';
-import { Redirect, Router, Route, Link} from 'react-router-dom';
-import Panel from '../../page/Panel/Panel'
+import {Redirect,Link  } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import './style.css';
+import axios from './../../service';
+// import { Link } from '@material-ui/core';
 
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
-  },
-}));
 
 class Fieldinput extends Component {
 
+  state={
+      login:"blaze-sk@mail.ru",
+      password:258852,
+      referrer: null,
+      navigate: false,
+      // token:null,
+  }
+ 
+  changeLogin = (e) =>{
+     this.setState({
+        login: e.target.value
+    });
+  }
+  changePass = (e) =>{
+    this.setState({
+       password: e.target.value
+   });
+ }
+ 
+  getUser = (e) => {
+  
+    e.preventDefault();
+
+    
+ 
+   const { login, password} = this.state;
+
+    
+    axios.post('v1/administrator.login?login=' +`${login}` + '&password=' +`${password}`)
+              .then(
+                  
+                  resp =>{
+                    console.log(resp);
+
+                    // window.localStorage.setItem("token",`${TOKEN}`);
+                    // const TOKEN = localStorage.getItem("token");    
+                        
+                      //truefalse ====================================>
+                      if(localStorage.getItem("token") !== null){
+                        // this.setState({referrer: '/home'});
+                        this.setState({ navigate: true});
+                            }
+                      if(localStorage.getItem("token") === null){
+                        this.setState({ navigate: false});
+                      }
+                      //truefalse <====================================
+                  })
+              .catch(function(error){
+                    console.log("Auth error");
+               })   
+         
+               
+  }
 
 
   render(){
-    
+          console.log(this.state.navigate);
     return(
-      
+      <React.Fragment>
+      {this.state.navigate === true?
+            <Redirect to='/home'/>:
       <form onSubmit={this.props.getUser}>
-        <Box display="flex" marginTop="" flexDirection="row" alignItems="center" justifyContent="center">
-          {/* <input type="text" name="loginName" data-name="username"  value={this.props.vl} onChange={this.props.handleChange}/>
-          
-          <input type="text" data-name="password" value={this.props.vlpass} onChange={this.props.handleChangePass}/> */}
-          {/* <button >Submit</button> */}
-        {/* <button onClick={this.setRedirect}>wfwef</button>  */}
-        
+        <Box display="flex" marginTop="" flexDirection="row" alignItems="center" justifyContent="center">        
+
         <TextField
                 style={{
                   marginTop:'0px',
-            
                 }}
         id="standard-password-input"
         label="Email"
@@ -53,8 +86,8 @@ class Fieldinput extends Component {
         margin="normal"
         name="loginName" 
         data-name="username" 
-        value={this.props.vl} 
-        onChange={this.props.handleChange}
+        value={this.state.login} 
+        onChange={(e)=>{this.changeLogin(e)}}
 
       />
         <TextField
@@ -62,33 +95,30 @@ class Fieldinput extends Component {
           marginTop:'0px',
           marginLeft:'30px',
           marginRight:'30px',
-        
         }}
         id="standard-password-input"
         label="Password"
         type="password"
         autoComplete="current-password"
         margin="normal"
-
         data-name="password" 
         value={this.props.vlpass} 
-        onChange={this.props.handleChangePass}
+        onChange={(e)=>{this.changePass(e)}}
       />
      
-        <Button heig className="btn-novaya nabegnya" variant="contained" color="primary" style={{background:'#72e549',marginTop:'15px'}}> 
-        <button style={{
-          background:"transparent",
-          border:'0',
-          color:'#fff',
-          fontSize:'16px'
-        }}>
-          Verify</button>
+        <Button heig className="btn-novaya nabegnya btnAuthClr" variant="contained" onClick={(e)=>this.getUser(e)}> 
+          Addd
         </Button>
         </Box>
       </form>
-
+      }</React.Fragment>
     )
   }
+//   render() {
+//     const {referrer} = this.state;
+//     if (referrer) return <Redirect to={referrer} />;
+    
+// }
 }
 
 export default Fieldinput;

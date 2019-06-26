@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import FieldInput from '../../components/TextFieldGroup/FieldInput';
 import Panel from '../Panel/Panel';
 import axios from 'axios';
-import { Route, Redirect } from 'react-router';
+import './style.css';
 
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,11 +19,12 @@ class Auth extends Component {
         textRed: 'Error',
         UserName:'',
     }
-    handleChangeUserName(e){
+    handleChangeUserName(e){ 
         if(e.target.value.match("^[a-zA-Z ]*$")!=null) {
           this.setState({UserName: e.target.value});
         }
       }
+      
     handleChange = (e) =>{
         console.log(e.target.value);
         this.setState({
@@ -40,45 +41,11 @@ class Auth extends Component {
 
     getUser = (e) =>{
         e.preventDefault();
-      
-         const us = {
-            login: this.state.value,
-            password: this.state.password,
-        };
-        
-        //post
-        axios.post('https://hunet.ru', {
-            us
-          })
-          .then(
-              resp =>{
-                  console.log(resp.login);
-              })
-         
-
-
-        //get
-        axios.get(`https://api.admin.manana.life/v1/administrator.auth?login=blaze-sk@mail.ru&password=258852`)
-            .then((res) => {
-                console.log(res);
-                const repos  = res.data.token;
-                this.setState(
-                    {reposs: repos}
-                    )
-                console.log(repos);
-                if(repos){
-                    
-                    ReactDOM.render(<Panel />, document.getElementById('root'));
-                }
-                else{
-                    alert("404");
-                }
-            });
-            //https://api.admin.blaze-sk.ru/v1/user.list?token=this.token&limit=10
     }
 
   render(){
 
+    console.log(this.state.login);
 
     return(
 
@@ -86,29 +53,14 @@ class Auth extends Component {
         <CssBaseline />
         <Container maxWidth="sm">
 
-          <div style={{
-                background:'#f3f3f3',
-                padding:'20px'
-            }}>
-           <div style={{
-               fontSize:'20px',
-               fontWeight:'bold',
-               borderRadius:'5px'
-           }}>
+          <div className="AuthWrap">
+           <div className="AuthMiddleWear">
                 Auth-Page
            </div>
             <div>
-                 {this.state.reposs? "Верно":"Заполните поле"}
+                 {/* {this.state.reposs? "Верно":"Заполните поле"} */}
             </div>
-                    <FieldInput 
-                    {...this.props}
-                    getUser={this.getUser}
-                    // handleChange={this.handleChange} 
-                    // vl={this.state.login} 
-                    // vlpass={this.state.password}  
-                    // handleChangePass={this.handleChangePass}
-                    />
-                    {this.state.reposs}
+                    <FieldInput />
          </div>
         </Container>
       </React.Fragment>
@@ -120,16 +72,16 @@ class Auth extends Component {
 export default Auth;
 
 
-export function SimpleContainer() {
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="sm">
-          <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
-        </Container>
-      </React.Fragment>
-    );
-  }
+// export function SimpleContainer() {
+//     return (
+//       <React.Fragment>
+//         <CssBaseline />
+//         <Container maxWidth="sm">
+//           <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
+//         </Container>
+//       </React.Fragment>
+//     );
+//   }
   
 
 

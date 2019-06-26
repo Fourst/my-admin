@@ -1,0 +1,14 @@
+/* <Button heig className="btn-novaya nabegnya " variant="contained" color="primary" style={{background:'#72e549',marginTop:'15px'}}>  */
+
+/* .Authbtn{
+}     */
+.btnAuthClr{
+
+}
+.Authbtn{
+background: transparent;
+  border:none;
+ 
+  font-size: 16px;
+}
+ 

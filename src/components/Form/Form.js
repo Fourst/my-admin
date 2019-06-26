@@ -4,13 +4,10 @@ import FieldInput from '../../components/TextFieldGroup/FieldInput';
 
 class Form extends Component {
 
-    
-    
-
     componentDidMount(){
         axios.get(`https://api.admin.blaze-sk.ru/v1/user.auth?login=blaze-sk@mail.ru&password=dfdfdf`)
             .then(res =>{
-                console.log(res.data);
+                console.log(res.data); 
                 this.setState({token: res.data});
             })
     }

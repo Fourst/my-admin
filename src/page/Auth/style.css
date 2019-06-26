@@ -1,0 +1,14 @@
+.AuthWrap{
+    
+    color: #282828;
+    padding:20px;
+    position: absolute;
+    top: 30%;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+.AuthMiddleWear{
+    fontSize:20px;
+    fontWeight:bold;
+    borderRadius:4px;
+}
