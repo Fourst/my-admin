@@ -12,8 +12,10 @@ import axios from './../../service';
 class Fieldinput extends Component {
 
   state={
-      login:"blaze-sk@mail.ru",
-      password:258852,
+      // login:"blaze-sk@mail.ru",
+      // password:258852,
+      login:"",
+      password:null,
       referrer: null,
       navigate: false,
       // token:null,
