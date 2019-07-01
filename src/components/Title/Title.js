@@ -41,7 +41,9 @@ class Title extends Component {
             <div style={{color:'#fff',fontSize:'20px',marginLeft:"10px"}}>{this.props.titleName}</div>
           </div>
             
-            <div><Search/></div>
+            <div>
+                {/*<Search/>*/}
+            </div>
         </div>
            )
           }

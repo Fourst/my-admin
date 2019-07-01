@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { TD } from '../TableCompany/TableCompany';
 import ShowBtn from '../ShowBtn/ShowBtn';
+import ShowBtnCompany from "../ShowBtn/ShowBtnCompany";
 
 
-export default class DataGrid extends Component{
+export default class DataCompany extends Component{
     state={
         users:null,
         currentP:1,
@@ -16,7 +17,7 @@ export default class DataGrid extends Component{
     componentDidMount(){
         // const tkn = window.localStorage.setItem("token","e1cd2e50646f90b8c52044a8e2f8a7f769e9ab9510202a14ed");
         const gettkn = window.localStorage.getItem("token");
-        axios.get('https://api.admin.manana.life/v1/user.list',{
+        axios.get('https://api.admin.manana.life/v1/company.list',{
             params:{
                 token: gettkn,
                 page: this.state.currentP,
@@ -41,8 +42,6 @@ export default class DataGrid extends Component{
     }
 
     onPlus(){
-
-
         const gettkn = window.localStorage.getItem("token");
         axios.get('https://api.admin.manana.life/v1/user.list',{
             params:{
@@ -90,11 +89,11 @@ export default class DataGrid extends Component{
 
                 <tr key={index} >
                     <TD keys={item.id}/>
-                    <TD keys={item.profile_id} />
-                    <TD keys={item.first_name} />
-                    <TD keys={item.last_name} />
-                    <TD keys={item.second_name} />
-                    <ShowBtn id={item.id} />
+                    <TD keys={item.title} />
+                    <TD keys={item.balance} />
+                    <TD keys={item.rating} />
+                    <TD keys={item.company_id} />
+                    <ShowBtnCompany id={item.id} />
                 </tr>
             )
         });

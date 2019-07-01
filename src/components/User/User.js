@@ -10,20 +10,20 @@ export default class User extends Component  {
     state ={
         idProf:null,
         idId:null,
-        idEmail:null,
         idName:null,
+        idLastName:null,
     }
     componentDidMount(){
-       
 
-        axios.get('https://api.admin.manana.life/v1/user.profile?id='+`${this.props.ids}`+'&token=765a041139be5e0b1781e6240da308e8ffe1ac8db0ec131f83')
+        const TOKEN = window.localStorage.getItem("token");
+        axios.get('https://api.admin.manana.life/v1/user.profile?id='+`${this.props.ids}`+'&token='+`${TOKEN}`+ '')
        .then((response) => {
             
          this.setState({
            idProf: response.data,
            idId: response.data.id,
-           idEmail:response.data.email,
-           idName:response.data.first_name,
+           idName:response.data.last_name,
+           idLastName:response.data.first_name,
          });
 
          console.log(response.data);
@@ -46,10 +46,10 @@ export default class User extends Component  {
                     
                     <div style={{paddingLeft:'50px',paddingRight:"0px"}}>
                     
-                    <Title style={{marginLeft:"65px"}} titleName={USER + `${context.state.id}`}/>
+                    <Title style={{marginLeft:"65px"}} titleName={"ID: "+`${context.state.id}`}/>
                     <div style={{marginLeft:"15px"}}>
-                        <div >Email:{this.state.idEmail}</div>
-                        <div>Name:{this.state.idName}</div>
+                        <div >Name:{this.state.idName}</div>
+                        <div>Last name:{this.state.idLastName}</div>
                     </div>
                     
                 

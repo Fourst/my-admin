@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import ShowBtn from '../ShowBtn/ShowBtn';
-import { optionalCallExpression, arrayExpression, jsxNamespacedName } from '@babel/types';
-import { expression } from '@babel/template';
+
+import ShowBtn from "../ShowBtn/ShowBtn";
+import ShowBtnCompany from "../ShowBtn/ShowBtnCompany";
 
 
 
@@ -16,15 +16,15 @@ export function TD (props){
 export  class TableCompany extends Component{
     state={
         fio:null,
-        search:null,
+        search:'',
     }
     componentDidMount(){
-
-         axios.get('https://api.admin.manana.life/v1/company.list?token=765a041139be5e0b1781e6240da308e8ffe1ac8db0ec131f83')
+         const TOKEN = window.localStorage.getItem("token");
+         axios.get('https://api.admin.manana.life/v1/company.list?token='+`${TOKEN}`+'')
         .then((response) => {
-
+            console.log(response.data.content);
           this.setState({
-            fio:response.data.list
+            fio:response.data.content
           });
          
           
@@ -48,16 +48,18 @@ export  class TableCompany extends Component{
      
         
        const tt = fio && fio.map((item,index) => {
+
         return (
-          
+
                 <tr key={index} >
                     <TD keys={item.id}/>
-                    <TD keys={item.profile_id} />
-                    <TD keys={item.first_name} />
-                    <TD keys={item.second_name} />
-                    <TD keys={item.email} />
-                    <ShowBtn id={item.id} />
-                </tr> 
+                    <TD keys={item.title} />
+                    <TD keys={item.balance} />
+                    <TD keys={item.rating} />
+                    <TD keys={item.rating} />
+                    <TD keys={item.rating} />
+                    <ShowBtnCompany id={item.id} />
+                </tr>
                            
         )
        });
@@ -67,12 +69,12 @@ export  class TableCompany extends Component{
             position:"relative",}} >
                     <input 
                     value = {this.state.search}
-              
+
                     style={{width:"100%",height:"25px",paddingLeft:"15px",fontSize:"16px",border:"none"}} placeholder="Search" 
                     
                     />
                     <div style={{position:"absolute",right:"15px",top:"3px",color:"rgb(173, 173, 173)"}}>
-                        <i class="fas fa-search"></i>
+                        <i className="fas fa-search"></i>
                     </div>
                 </div>
                 
@@ -81,8 +83,9 @@ export  class TableCompany extends Component{
                 
                  <tr style={{background:'rgb(238, 244, 255)'}}>
                     <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}>id</td>            
-                    <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}></td>
-                    <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}></td>
+                    <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}>title</td>
+                    <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}>balance</td>
+                    <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}>rating</td>
                     <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}></td>
                     <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)"}}></td>
                     <td style={{padding:'14px',color:"rgba(0, 0, 0, 0.54)",maxWidth:"100px"}}>btn</td>

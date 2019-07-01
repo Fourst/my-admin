@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { keys } from '@material-ui/core/styles/createBreakpoints';
-
+import ExitBtn from '../../components/ExitBtn/ExitBtn';
 export default class SideBarBlock extends Component{
   
   render(){
@@ -102,11 +102,11 @@ export default class SideBarBlock extends Component{
               justifyContent:'center',
               borderBottom:"1px solid #e8e8e8a6",
             }}> 
-              <Link to="/" style={{
-                color:'#ffff'
-                }}>
-              <i class="fas fa-sign-out-alt"></i>
-              </Link>
+              {/*<Link to="/" style={{*/}
+              {/*  color:'#ffff'*/}
+              {/*  }}>*/}
+                <ExitBtn/>
+              {/*</Link>*/}
             </li>
             </ul>
         </div>

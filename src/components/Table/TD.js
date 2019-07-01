@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Pagination from 'react-bootstrap/Pagination'
+
 
 export default class TD extends Component{
   

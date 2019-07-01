@@ -10,7 +10,7 @@ import axios from 'axios';
 import {Table} from '../../components/Table/Table'
 import Title from '../../components/Title/Title';
 import DataGrid from '../../components/Table/DataGrid';
-import Pagination from '../../components/Pagination/Pagination';
+
 
 
 

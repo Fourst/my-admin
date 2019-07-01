@@ -12,10 +12,10 @@ import axios from './../../service';
 class Fieldinput extends Component {
 
   state={
-      // login:"blaze-sk@mail.ru",
-      // password:258852,
-      login:"",
-      password:null,
+      login:"blaze-sk@mail.ru",
+      password:"258852",
+      // login:"",
+      // password:null,
       referrer: null,
       navigate: false,
       // token:null,
@@ -41,41 +41,43 @@ class Fieldinput extends Component {
    const { login, password} = this.state;
 
     
-    axios.post('v1/administrator.login?login=' +`${login}` + '&password=' +`${password}`)
+    axios.get('v1/administrator.login?login=' +`${login}` + '&password=' +`${password}`)
               .then(
                   
                   resp =>{
-                    console.log(resp);
+                    const TOKENUSER = resp.data.token;
 
-                    // window.localStorage.setItem("token",`${TOKEN}`);
-                    // const TOKEN = localStorage.getItem("token");    
-                        
-                      //truefalse ====================================>
-                      if(localStorage.getItem("token") !== null){
-                        // this.setState({referrer: '/home'});
-                        this.setState({ navigate: true});
-                            }
-                      if(localStorage.getItem("token") === null){
-                        this.setState({ navigate: false});
+                    window.localStorage.setItem("token",`${TOKENUSER}`);
+
+                    let GETTOKEN = localStorage.getItem("token");
+
+                    if (GETTOKEN === "undefined" ){
+                        this.setState({navigate: false})
+
+                    }
+                      if (GETTOKEN !== "undefined" ){
+                          this.setState({navigate: true})
+
                       }
-                      //truefalse <====================================
+
                   })
               .catch(function(error){
                     console.log("Auth error");
-               })   
-         
+               })
+
                
   }
-
+//
 
   render(){
-          console.log(this.state.navigate);
+
     return(
       <React.Fragment>
-      {this.state.navigate === true?
-            <Redirect to='/home'/>:
-      <form onSubmit={this.props.getUser}>
-        <Box display="flex" marginTop="" flexDirection="row" alignItems="center" justifyContent="center">        
+      {
+          this.state.navigate?
+          <Redirect to='/home'/>:
+            <form onSubmit={this.props.getUser}>
+        <Box display="flex" marginTop="" flexDirection="row" alignItems="center" justifyContent="center">
 
         <TextField
                 style={{
@@ -104,12 +106,12 @@ class Fieldinput extends Component {
         autoComplete="current-password"
         margin="normal"
         data-name="password" 
-        value={this.props.vlpass} 
+        value={this.props.vlpass}
         onChange={(e)=>{this.changePass(e)}}
       />
      
-        <Button heig className="btn-novaya nabegnya btnAuthClr" variant="contained" onClick={(e)=>this.getUser(e)}> 
-          Addd
+        <Button  className="btn-novaya nabegnya btnAuthClr" variant="contained" onClick={(e)=>this.getUser(e)}>
+          Войти
         </Button>
         </Box>
       </form>

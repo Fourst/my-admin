@@ -9,7 +9,7 @@ export default class BtnBack extends Component{
          (context) =>(
             <div>
                 <Link to="/home">
-                    <div style={{color:'#fff',cursor:"pointer"}} onClick={context.backFalse}>       
+                    <div style={{color:'#fff',cursor:"pointer"}} onClick={context.backFalse}>
                             <i class="fas fa-caret-left"></i>
                     </div>
                </Link>

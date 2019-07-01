@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ShowBtn from '../ShowBtn/ShowBtn';
 import TD from './TD';
-import Pagination from 'react-bootstrap/Pagination';
-import DataGrid from './DataGrid';
-
 
 export  class Table extends Component{
     state={
@@ -66,7 +63,7 @@ export  class Table extends Component{
 
     render(){
         const { fio } = this.state;
-        // const btnPagination = 
+
        
 
 

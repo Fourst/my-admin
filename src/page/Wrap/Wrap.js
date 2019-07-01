@@ -7,6 +7,7 @@ import TableCompany from '../../components/TableCompany/TableCompany';
 import Title from '../../components/Title/Title';
 import {Main} from '../../page/Main/Main';
 import User from '../../components/User/User';
+import Company from '../../components/Company/Company';
 import {MyContext,MyProvider} from '../../page/Panel/Panel';
 import Auth from '../Auth/Auth';
 
@@ -15,7 +16,7 @@ import Auth from '../Auth/Auth';
 class Wrap extends Component {
  
   render(){
-    window.localStorage.setItem("token",null);
+    // window.localStorage.setItem("token",null);
     
     return(
     
@@ -27,9 +28,10 @@ class Wrap extends Component {
                 <Route path="/home"  component={Home} />
                 <Route path="/prof"  component={Profile} />
                 <Route path="/user/id"  component={()=> <User ids={context.state.id}/>} />
+                <Route path="/prof/id"  component={()=> <Company ids={context.state.id}/>}/>} />
                 </div>
-                ) 
-              }    
+                )
+              }
              </MyContext.Consumer>                  
      
     );
